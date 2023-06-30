@@ -1,3 +1,52 @@
 *{
-    font-family: inherit;
+    font-family: poppins;
+}
+
+.new-nav{
+    position: relative;
+    background: transparent;
+}
+.new-nav::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 35%;
+    z-index: -1;
+}
+
+.partition{
+    color: darkslateblue;
+    width: 20px;
+    height: 2px;
+    opacity: 100%;
+    transform: rotate(90deg);
+}
+
+.color-boxes{
+    cursor: pointer;
+    border: 2px solid;
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 2px 2px rgb(136, 136, 136);
+}
+
+.current-theme{
+    box-shadow: 0 0 2px 2px black;
+}
+
+#color1{background-color:#05001c;}
+#color2{background-color:#400202;}
+#color3{background-color:#024033;}
+#color4{background-color:#161618;}
+#color5{background-color:white;}
+
+.shadow{
+    box-shadow: none;
 }

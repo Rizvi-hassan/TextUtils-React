@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+// import {link} from 'react-router-dom';
 
 export default function TextForm(props) {
-    const [text, setText] = useState("Enter text here");
+    const [text, setText] = useState("");
     const [count, setCount] = useState(0);
     
     const handleUpClick = () => {
         // console.log("uppercase button was clicked");/
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to upper Case", 'primary')
     };
     const handleDownClick = () => {
         // console.log("uppercase button was clicked");/
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to lower Case", 'primary')
+
     };
     const handleClearClick = () => {
         // console.log("uppercase button was clicked");/
         setText("");
+        props.showAlert("Cleared the textarea.", 'primary')
+
     };
 
     const handleChallegneClick = () => {
@@ -49,13 +55,20 @@ export default function TextForm(props) {
         setText(event.target.value);
     };
 
+    const handleCopyClick = () => {
+        var text = document.getElementById('myBox');
+        text.select();
+        navigator.clipboard.writeText(text.value);
+        props.showAlert("copied to clipboard", 'success')
+    }
+
     return (
         <>
-            <div className="container" style ={{ color: props.mode === 'light'? 'black':'#e7e7e7'}}>
+            <div className="container" style ={{ color: props.theme.text}}>
                 <h3>{props.heading}</h3>
                 <div className="mb-3">
-                    <textarea style ={{ color: props.mode === 'light'? 'black':'#e7e7e7',
-                                        background: props.mode === 'light'? 'white':'#05001c'}}
+                    <textarea style ={{ color: props.theme.text,
+                                        background: props.theme.textar}}
                         className="form-control"
                         id="myBox"
                         rows="8"
@@ -64,27 +77,33 @@ export default function TextForm(props) {
                         value={text}
                     ></textarea>
                 </div>
-                <button className="btn btn-primary" onClick={handleUpClick}>
+                <button className={`btn btn-${props.theme.btn}`} onClick={handleUpClick}>
                     Convert to uppercase
                 </button>
                 <button
-                    className="btn btn-primary mx-2"
+                    className={`btn btn-${props.theme.btn} mx-3`}
                     onClick={handleDownClick}
                 >
                     Convert to lowercase
                 </button>
-                <button className="btn btn-primary " onClick={handleClearClick}>
+                <button className={`btn btn-${props.theme.btn}`} onClick={handleClearClick}>
                     Clear all
                 </button>
                 <button
-                    className="btn btn-primary mx-2"
+                    className={`btn btn-${props.theme.btn} mx-3`}
+                    onClick={handleCopyClick}
+                >
+                    Copy to clipboard
+                </button>
+                <button
+                    className={`btn btn-${props.theme.btn} `}
                     onClick={handleChallegneClick}
                 >
                     What is React?
                 </button>
             </div>
-            <br />
-            <div className="container " style ={{ color: props.mode === 'light'? 'black':'#e7e7e7'}}>
+            <hr style = {{color: props.theme.nav === 'light'? 'black':'white'}} />
+            <div className="container " style ={{ color: props.theme.text}}>
                 <h2>Your Text Summary</h2>
                 <p>
                     Words:{" "}
@@ -101,8 +120,9 @@ export default function TextForm(props) {
                     minutes required to read the words
                 </p>
                 <h2>Preview</h2>
-                <p>{text}</p>
+                <p>{text === ''? 'Write something above to see preview..': text}</p>
             </div>
+            
         </>
     );
 }
