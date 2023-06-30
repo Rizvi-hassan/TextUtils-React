@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 
 export default function Navbar(props) {
@@ -39,21 +39,21 @@ export default function Navbar(props) {
   return (
     <nav className={`new-nav navbar navbar-expand-lg navbar-${props.theme.nav} `}>
       <div className="container-fluid  ">
-        <Link className="navbar-brand  " to="/" >
+        <a className="navbar-brand  " href= "/" >
           {props.title}
-        </Link>
+        </a>
         <hr className="partition"/>
         <div className="collapse navbar-collapse  " id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active " aria-expanded='false' to="/">
+              <a className="nav-link active " aria-expanded='false' href= "#">
                 Home
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" to="about">
+              <a className="nav-link disabled" href= "#">
               {props.about}
-              </Link>
+              </a>
             </li>
           </ul>
           
